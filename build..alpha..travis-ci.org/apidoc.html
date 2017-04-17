@@ -1,0 +1,797 @@
+<div class="apidocDiv">
+<style>
+/*csslint
+*/
+.apidocDiv {
+    background: #fff;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.apidocDiv a[href] {
+    color: #33f;
+    font-weight: bold;
+    text-decoration: none;
+}
+.apidocDiv a[href]:hover {
+    text-decoration: underline;
+}
+.apidocCodeCommentSpan {
+    background: #bbf;
+    color: #000;
+    display: block;
+}
+.apidocCodeKeywordSpan {
+    color: #d00;
+    font-weight: bold;
+}
+.apidocCodePre {
+    background: #eef;
+    border: 1px solid;
+    color: #777;
+    padding: 5px;
+    white-space: pre-wrap;
+}
+.apidocFooterDiv {
+    margin-top: 20px;
+    text-align: center;
+}
+.apidocModuleLi {
+    margin-top: 10px;
+}
+.apidocSectionDiv {
+    border-top: 1px solid;
+    margin-top: 20px;
+}
+.apidocSignatureSpan {
+    color: #777;
+    font-weight: bold;
+}
+</style>
+<h1>api documentation for
+    <a
+
+        href="http://appjs.org"
+
+    >appjs (v0.0.20)</a>
+</h1>
+<h4>AppJS is a SDK on top of nodejs to develop desktop applications using HTML/CSS/JS</h4>
+<div class="apidocSectionDiv"><a
+    href="#apidoc.tableOfContents"
+    id="apidoc.tableOfContents"
+><h1>table of contents</h1></a><ol>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.appjs">module appjs</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.appjs.bridge">
+            function <span class="apidocSignatureSpan">appjs.</span>bridge
+            <span class="apidocSignatureSpan">(nativeWindow, win, unwrapEphemeral)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.appjs.browser_require">
+            function <span class="apidocSignatureSpan">appjs.</span>browser_require
+            <span class="apidocSignatureSpan">(window)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">object <span class="apidocSignatureSpan">appjs.</span>utils</span>
+
+        </li>
+
+    </ol></li>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.appjs.bridge">module appjs.bridge</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.appjs.bridge.bridge">
+            function <span class="apidocSignatureSpan">appjs.</span>bridge
+            <span class="apidocSignatureSpan">(nativeWindow, win, unwrapEphemeral)</span>
+            </a>
+
+        </li>
+
+    </ol></li>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.appjs.browser_require">module appjs.browser_require</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.appjs.browser_require.browser_require">
+            function <span class="apidocSignatureSpan">appjs.</span>browser_require
+            <span class="apidocSignatureSpan">(window)</span>
+            </a>
+
+        </li>
+
+    </ol></li>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.appjs.utils">module appjs.utils</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.appjs.utils.constants">
+            function <span class="apidocSignatureSpan">appjs.utils.</span>constants
+            <span class="apidocSignatureSpan">(o, p)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.appjs.utils.decorate">
+            function <span class="apidocSignatureSpan">appjs.utils.</span>decorate
+            <span class="apidocSignatureSpan">(o)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.appjs.utils.inherit">
+            function <span class="apidocSignatureSpan">appjs.utils.</span>inherit
+            <span class="apidocSignatureSpan">(Ctor, Super, props)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.appjs.utils.isObject">
+            function <span class="apidocSignatureSpan">appjs.utils.</span>isObject
+            <span class="apidocSignatureSpan">(o)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.appjs.utils.log">
+            function <span class="apidocSignatureSpan">appjs.utils.</span>log
+            <span class="apidocSignatureSpan">(path, type, context, msg)</span>
+            </a>
+
+        </li>
+
+    </ol></li>
+
+</ol></div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.appjs" id="apidoc.module.appjs">module appjs</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.appjs.bridge" id="apidoc.element.appjs.bridge">
+        function <span class="apidocSignatureSpan">appjs.</span>bridge
+        <span class="apidocSignatureSpan">(nativeWindow, win, unwrapEphemeral)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function bridge(nativeWindow, win, unwrapEphemeral){
+  function isObject(o){
+    if (o == null) return o !== null &#x26;&#x26; o !== undefined;
+    return typeof o === &#x27;object&#x27; || typeof o === &#x27;function&#x27;;
+  }
+
+  function encode(msg){
+    if (msg == null)
+      return &#x27;{}&#x27;;
+    else if (typeof msg === &#x27;object&#x27;)
+      return JSON.stringify(msg);
+    else if (typeof msg === &#x27;string&#x27;)
+      return msg;
+    else
+      throw new TypeError(&#x22;Tried to encode invalid type&#x22;);
+  }
+
+  function decode(msg){
+    try {
+      return JSON.parse(msg);
+    } catch (e) {
+      return { error: e };
+    }
+  }
+
+
+  var _call   = Function.prototype.call,
+      _apply  = Function.prototype.apply,
+      _bind   = Function.prototype.bind,
+      _slice  = Array.prototype.slice,
+      _hasOwn = Object.prototype.hasOwnProperty,
+      char    = String.fromCharCode;
+
+  var foreignObjects = new WeakMap,
+      foreignIDs = new WeakMap,
+      localObjects = new WeakMap,
+      localIDs = new WeakMap,
+      localCanonicals = [],
+      foreignCanonicals = Object.create(null);
+
+  var TOKEN       = char(1),
+      LITERAL     = char(2),
+      TRUE        = [TOKEN, 1],
+      FALSE       = [TOKEN, 2],
+      UNDEFINED   = [TOKEN, 3],
+      NULL        = [TOKEN, 4],
+      NAN         = [TOKEN, 5],
+      INFINITY    = [TOKEN, 6],
+      NEGINFINITY = [TOKEN, 7],
+      NEGZERO     = [TOKEN, 8],
+      ZERO        = [TOKEN, 9];
+
+  var tokens = [, true, false, undefined, null, NaN, Infinity, -Infinity, -0, 0];
+
+  var pipe = function(source, listeners){
+    source.onmessage = function onmessage(msg){
+      var res = {};
+      msg = decode(msg);
+      listeners[msg.type] &#x26;&#x26; listeners[msg.type](msg.msg, res);
+      return encode(res.result === undefined ? {} : res.result);
+    };
+
+    return {
+      send: function send(type, msg){
+        msg = { type: type, msg: msg };
+        return decode(source.send(encode(msg)));
+      },
+      listen: function listen(type, handler){
+        listeners[type] = handler;
+      }
+    };
+  }(nativeWindow || appjs, {});
+
+  if (!nativeWindow) {
+    var LOCAL = char(15), FOREIGN = char(16);
+    var logger = function logger(type, error){
+      if (typeof node !== &#x27;undefined&#x27;) {
+        logger = function logger(type, error){
+          node.process.emit(&#x27;appjs-log&#x27;, type, &#x27;browser&#x27;, error);
+        };
+        logger(type, context, error);
+      }
+    }
+  } else {
+    var LOCAL = char(16), FOREIGN = char(15);
+    var logger = function logger(type, error){
+      process.emit(&#x27;appjs-log&#x27;, type, &#x27;node&#x27;, error);
+    };
+    nativeWindow.once(&#x27;context-released&#x27;, function released(){
+      mirror = {
+        type      : function(){ return [&#x27;object&#x27;] },
+        keys      : function(){ return [] },
+        enumerate : function(){ return [] },
+        props     : function(){ return [] },
+        get       : function(){ return UNDEFINED },
+        set       : function(){ return TRUE },
+        proto     : function(){ return NULL },
+        has       : function(){ return FALSE },
+        hasOwn    : function(){ return FALSE },
+        delete    : function(){ return TRUE },
+        define    : function(){ return TRUE },
+        describe  : function(){ return UNDEFINED },
+        construct : function(){ return UNDEFINED },
+        apply     : function(){ return UNDEFINED }
+      };
+      unwrap = wrap = pipe.send = pipe.listen = function(){ return {} };
+      nativeWindow.onmessage = function(){ return &#x27;&#x27;; }
+      nativeWindow = null;
+      foreignObjects = foreignIDs = foreignCanonicals = null;
+      localObjects = localIDs = localCanonicals = null;
+    });
+  }
+
+
+
+  wrap(nativeWindow ? global : window);
+
+  function initForeign(obj, proxy){
+    foreignObjects.set(proxy, obj);
+    foreignIDs.set(obj, proxy);
+    foreignCanonicals[obj[1]] = obj;
+    return proxy;
+  }
+
+  function unwrap(obj){
+    if (!isObject(obj)) {
+      return obj;
+    } else if (obj[0] === TOKEN) {
+      return tokens[obj[1]];
+    } else if (obj[0] === LITERAL) {
+      return ...</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.appjs.browser_require" id="apidoc.element.appjs.browser_require">
+        function <span class="apidocSignatureSpan">appjs.</span>browser_require
+        <span class="apidocSignatureSpan">(window)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function browserRequire(window){
+
+  function require(request){
+    return parent.require(request);
+  }
+
+  window.Function(&#x27;return &#x27;+function(_require, process, Buffer, global){
+    var Module = _require(&#x27;module&#x27;),
+        path   = _require(&#x27;path&#x27;);
+
+    var browser = { compile: compileInBrowser,
+                    cache: {} };
+
+    var node    = { compile: Module.prototype._compile,
+                    cache: Module._cache };
+
+    var executingInBrowser = false;
+
+    Module.prototype._compile = function(content, filename){
+      var moduleSystem = executingInBrowser ? browser : node;
+      Module._cache = moduleSystem.cache;
+      var ret = moduleSystem.compile.call(this, content, filename);
+      Module._cache = moduleSystem.cache;
+      return ret;
+    };
+
+    window.require = function require(request, runInNode){
+      executingInBrowser = !runInNode;
+      var result = _require(request);
+      executingInBrowser = false;
+      return result;
+    };
+
+    function compileInBrowser(content, filename) {
+      var self = this;
+
+      function require(request, runInNode){
+        executingInBrowser = !runInNode;
+        request = self.require(request);
+        executingInBrowser = false;
+        return request;
+      }
+
+      function resolve(request){
+        return Module._resolveFilename(request, self);
+      }
+
+      require.extensions = Module._extensions;
+      require.cache      = Module._cache;
+      require.resolve    = resolve;
+      require.main       = document.mainModule;
+
+      content = content.replace(/^\#\!.*/, &#x27;&#x27;);
+
+      var
+       dirname = path.dirname(filename),
+       module  = this,
+       exports = this.exports;
+
+       args  = [&#x27;exports&#x27;,&#x27;require&#x27;,&#x27;module&#x27;,&#x27;__filename&#x27;,&#x27;__dirname&#x27;,&#x27;Buffer&#x27;,&#x27;process&#x27;,&#x27;global&#x27;,content],
+       argvs = [ exports,  require,  module,    filename,    dirname,  Buffer,  process,  global];
+
+      try {
+        return Function.apply(null, args).apply(exports, argvs);
+      } catch (e) {
+        return e;
+      }
+    }
+  })().call(window, require, process, Buffer, window);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+
+</div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.appjs.bridge" id="apidoc.module.appjs.bridge">module appjs.bridge</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.appjs.bridge.bridge" id="apidoc.element.appjs.bridge.bridge">
+        function <span class="apidocSignatureSpan">appjs.</span>bridge
+        <span class="apidocSignatureSpan">(nativeWindow, win, unwrapEphemeral)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function bridge(nativeWindow, win, unwrapEphemeral){
+  function isObject(o){
+    if (o == null) return o !== null &#x26;&#x26; o !== undefined;
+    return typeof o === &#x27;object&#x27; || typeof o === &#x27;function&#x27;;
+  }
+
+  function encode(msg){
+    if (msg == null)
+      return &#x27;{}&#x27;;
+    else if (typeof msg === &#x27;object&#x27;)
+      return JSON.stringify(msg);
+    else if (typeof msg === &#x27;string&#x27;)
+      return msg;
+    else
+      throw new TypeError(&#x22;Tried to encode invalid type&#x22;);
+  }
+
+  function decode(msg){
+    try {
+      return JSON.parse(msg);
+    } catch (e) {
+      return { error: e };
+    }
+  }
+
+
+  var _call   = Function.prototype.call,
+      _apply  = Function.prototype.apply,
+      _bind   = Function.prototype.bind,
+      _slice  = Array.prototype.slice,
+      _hasOwn = Object.prototype.hasOwnProperty,
+      char    = String.fromCharCode;
+
+  var foreignObjects = new WeakMap,
+      foreignIDs = new WeakMap,
+      localObjects = new WeakMap,
+      localIDs = new WeakMap,
+      localCanonicals = [],
+      foreignCanonicals = Object.create(null);
+
+  var TOKEN       = char(1),
+      LITERAL     = char(2),
+      TRUE        = [TOKEN, 1],
+      FALSE       = [TOKEN, 2],
+      UNDEFINED   = [TOKEN, 3],
+      NULL        = [TOKEN, 4],
+      NAN         = [TOKEN, 5],
+      INFINITY    = [TOKEN, 6],
+      NEGINFINITY = [TOKEN, 7],
+      NEGZERO     = [TOKEN, 8],
+      ZERO        = [TOKEN, 9];
+
+  var tokens = [, true, false, undefined, null, NaN, Infinity, -Infinity, -0, 0];
+
+  var pipe = function(source, listeners){
+    source.onmessage = function onmessage(msg){
+      var res = {};
+      msg = decode(msg);
+      listeners[msg.type] &#x26;&#x26; listeners[msg.type](msg.msg, res);
+      return encode(res.result === undefined ? {} : res.result);
+    };
+
+    return {
+      send: function send(type, msg){
+        msg = { type: type, msg: msg };
+        return decode(source.send(encode(msg)));
+      },
+      listen: function listen(type, handler){
+        listeners[type] = handler;
+      }
+    };
+  }(nativeWindow || appjs, {});
+
+  if (!nativeWindow) {
+    var LOCAL = char(15), FOREIGN = char(16);
+    var logger = function logger(type, error){
+      if (typeof node !== &#x27;undefined&#x27;) {
+        logger = function logger(type, error){
+          node.process.emit(&#x27;appjs-log&#x27;, type, &#x27;browser&#x27;, error);
+        };
+        logger(type, context, error);
+      }
+    }
+  } else {
+    var LOCAL = char(16), FOREIGN = char(15);
+    var logger = function logger(type, error){
+      process.emit(&#x27;appjs-log&#x27;, type, &#x27;node&#x27;, error);
+    };
+    nativeWindow.once(&#x27;context-released&#x27;, function released(){
+      mirror = {
+        type      : function(){ return [&#x27;object&#x27;] },
+        keys      : function(){ return [] },
+        enumerate : function(){ return [] },
+        props     : function(){ return [] },
+        get       : function(){ return UNDEFINED },
+        set       : function(){ return TRUE },
+        proto     : function(){ return NULL },
+        has       : function(){ return FALSE },
+        hasOwn    : function(){ return FALSE },
+        delete    : function(){ return TRUE },
+        define    : function(){ return TRUE },
+        describe  : function(){ return UNDEFINED },
+        construct : function(){ return UNDEFINED },
+        apply     : function(){ return UNDEFINED }
+      };
+      unwrap = wrap = pipe.send = pipe.listen = function(){ return {} };
+      nativeWindow.onmessage = function(){ return &#x27;&#x27;; }
+      nativeWindow = null;
+      foreignObjects = foreignIDs = foreignCanonicals = null;
+      localObjects = localIDs = localCanonicals = null;
+    });
+  }
+
+
+
+  wrap(nativeWindow ? global : window);
+
+  function initForeign(obj, proxy){
+    foreignObjects.set(proxy, obj);
+    foreignIDs.set(obj, proxy);
+    foreignCanonicals[obj[1]] = obj;
+    return proxy;
+  }
+
+  function unwrap(obj){
+    if (!isObject(obj)) {
+      return obj;
+    } else if (obj[0] === TOKEN) {
+      return tokens[obj[1]];
+    } else if (obj[0] === LITERAL) {
+      return ...</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+</div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.appjs.browser_require" id="apidoc.module.appjs.browser_require">module appjs.browser_require</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.appjs.browser_require.browser_require" id="apidoc.element.appjs.browser_require.browser_require">
+        function <span class="apidocSignatureSpan">appjs.</span>browser_require
+        <span class="apidocSignatureSpan">(window)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function browserRequire(window){
+
+  function require(request){
+    return parent.require(request);
+  }
+
+  window.Function(&#x27;return &#x27;+function(_require, process, Buffer, global){
+    var Module = _require(&#x27;module&#x27;),
+        path   = _require(&#x27;path&#x27;);
+
+    var browser = { compile: compileInBrowser,
+                    cache: {} };
+
+    var node    = { compile: Module.prototype._compile,
+                    cache: Module._cache };
+
+    var executingInBrowser = false;
+
+    Module.prototype._compile = function(content, filename){
+      var moduleSystem = executingInBrowser ? browser : node;
+      Module._cache = moduleSystem.cache;
+      var ret = moduleSystem.compile.call(this, content, filename);
+      Module._cache = moduleSystem.cache;
+      return ret;
+    };
+
+    window.require = function require(request, runInNode){
+      executingInBrowser = !runInNode;
+      var result = _require(request);
+      executingInBrowser = false;
+      return result;
+    };
+
+    function compileInBrowser(content, filename) {
+      var self = this;
+
+      function require(request, runInNode){
+        executingInBrowser = !runInNode;
+        request = self.require(request);
+        executingInBrowser = false;
+        return request;
+      }
+
+      function resolve(request){
+        return Module._resolveFilename(request, self);
+      }
+
+      require.extensions = Module._extensions;
+      require.cache      = Module._cache;
+      require.resolve    = resolve;
+      require.main       = document.mainModule;
+
+      content = content.replace(/^\#\!.*/, &#x27;&#x27;);
+
+      var
+       dirname = path.dirname(filename),
+       module  = this,
+       exports = this.exports;
+
+       args  = [&#x27;exports&#x27;,&#x27;require&#x27;,&#x27;module&#x27;,&#x27;__filename&#x27;,&#x27;__dirname&#x27;,&#x27;Buffer&#x27;,&#x27;process&#x27;,&#x27;global&#x27;,content],
+       argvs = [ exports,  require,  module,    filename,    dirname,  Buffer,  process,  global];
+
+      try {
+        return Function.apply(null, args).apply(exports, argvs);
+      } catch (e) {
+        return e;
+      }
+    }
+  })().call(window, require, process, Buffer, window);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+</div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.appjs.utils" id="apidoc.module.appjs.utils">module appjs.utils</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.appjs.utils.constants" id="apidoc.element.appjs.utils.constants">
+        function <span class="apidocSignatureSpan">appjs.utils.</span>constants
+        <span class="apidocSignatureSpan">(o, p)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function constants(o, p){
+  Object.keys(p).forEach(function(key){
+    Object.defineProperty(o, key, {
+      enumerable: true,
+      value: p[key]
+    });
+  });
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.appjs.utils.decorate" id="apidoc.element.appjs.utils.decorate">
+        function <span class="apidocSignatureSpan">appjs.utils.</span>decorate
+        <span class="apidocSignatureSpan">(o)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function decorate(o){
+  var a, b, c, d,
+      hidden = arguments[1] === true,
+      overwrite = arguments[2] !== false;
+
+  for (a=0; a &#x3c; arguments.length; a++) {
+    if (isArray(b = arguments[a])) {
+      for (c = 0; c &#x3c; b.length; c++) {
+        if (typeof b[c] === &#x27;function&#x27; &#x26;&#x26; (d = b[c].name)) {
+          if (hidden || d === &#x27;toString&#x27;) {
+            hiddenVal.define(o, d, b[c]);
+          } else {
+            o[d] = b[c];
+          }
+        }
+      }
+    } else if (isObject(b)) {
+      for (c in b) {
+        try {
+          if (d = getOwnDescriptor(b, c)) {
+            if (d.get || d.set) {
+              defineProperty(o, c, d);
+            } else {
+              o[c] = d.value;
+              if (hidden || c === &#x27;toString&#x27; || c === &#x27;constructor&#x27;) {
+                defineProperty(o, c, hiddenDesc);
+              }
+            }
+          }
+        } catch (e) {}
+      }
+    }
+  }
+  return o;
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.appjs.utils.inherit" id="apidoc.element.appjs.utils.inherit">
+        function <span class="apidocSignatureSpan">appjs.utils.</span>inherit
+        <span class="apidocSignatureSpan">(Ctor, Super, props)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function inherit(Ctor, Super, props){
+  Ctor.prototype = Object.create(Super.prototype);
+  decorate(Ctor.prototype, true, props);
+  decorate(Ctor.prototype, true, {
+    constructor: Ctor
+  });
+  return Ctor;
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.appjs.utils.isObject" id="apidoc.element.appjs.utils.isObject">
+        function <span class="apidocSignatureSpan">appjs.utils.</span>isObject
+        <span class="apidocSignatureSpan">(o)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function isObject(o){
+  return o != null &#x26;&#x26; typeof o === &#x27;object&#x27; || typeof o === &#x27;function&#x27;;
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.appjs.utils.log" id="apidoc.element.appjs.utils.log">
+        function <span class="apidocSignatureSpan">appjs.utils.</span>log
+        <span class="apidocSignatureSpan">(path, type, context, msg)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">function log(path, type, context, msg){
+  var err;
+  if (isError(type)) err = type, type = null;
+  else if (isError(context)) err = context, context = null;
+  else if (isError(msg)) err = msg, msg = null;
+  if (err) {
+    if (!msg) msg = err.stack || err.message;
+    if (!type) type = err.message || err.name;
+  }
+  var out = &#x27;&#x27;;
+  if (type) out = type + &#x27;: &#x27;;
+  if (msg) out += msg;
+  if (context &#x26;&#x26; typeof context === &#x27;object&#x27;) {
+    try { context = JSON.stringify(context) }
+    catch (e) { context += &#x27;&#x27; }
+    out += &#x27;[ &#x27; + context + &#x27; ]&#x27;;
+  }
+  if (out) {
+    var file = path || logPath;
+    try { fs.writeFileSync(logPath, out) }
+    catch (e) { console.log(e, out) }
+  }
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+var window = app.createWindow({
+width  : 640,
+height : 460,
+icons  : __dirname + &#x27;/content/icons&#x27;
+});
+
+window.on(&#x27;create&#x27;, function(){
+console.<span class="apidocCodeKeywordSpan">log</span>(&#x22;Window Created&#x22;);
+window.frame.show();
+window.frame.center();
+});
+
+window.on(&#x27;ready&#x27;, function(){
+console.log(&#x22;Window Ready&#x22;);
+window.require = require;
+...</pre></li>
+    </ul>
+
+
+</div>
+
+<div class="apidocFooterDiv">
+    [ this document was created with
+    <a href="https://github.com/kaizhu256/node-utility2" target="_blank">utility2</a>
+    ]
+</div>
+</div>
