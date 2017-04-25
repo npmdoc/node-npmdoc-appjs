@@ -1,4 +1,7 @@
-# api documentation for  [appjs (v0.0.20)](http://appjs.org)  [![npm package](https://img.shields.io/npm/v/npmdoc-appjs.svg?style=flat-square)](https://www.npmjs.org/package/npmdoc-appjs) [![travis-ci.org build-status](https://api.travis-ci.org/npmdoc/node-npmdoc-appjs.svg)](https://travis-ci.org/npmdoc/node-npmdoc-appjs)
+# npmdoc-appjs
+
+#### basic api documentation for  [appjs (v0.0.20)](http://appjs.org)  [![npm package](https://img.shields.io/npm/v/npmdoc-appjs.svg?style=flat-square)](https://www.npmjs.org/package/npmdoc-appjs) [![travis-ci.org build-status](https://api.travis-ci.org/npmdoc/node-npmdoc-appjs.svg)](https://travis-ci.org/npmdoc/node-npmdoc-appjs)
+
 #### AppJS is a SDK on top of nodejs to develop desktop applications using HTML/CSS/JS
 
 [![NPM](https://nodei.co/npm/appjs.png?downloads=true&downloadRank=true&stars=true)](https://www.npmjs.com/package/appjs)
